@@ -13,7 +13,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.btns-header {
+  display: flex;
+  justify-content: space-between;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,7 +27,14 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.cartShopp{
+  display: flex;
+  align-items: self-end;
+  padding-right: 1937px;
+}
+.btn-cart{
+  height: 2em;
+}
 .App-link {
   color: #61dafb;
 }
@@ -49,7 +59,7 @@ h1{
 }
 img {
   width: 5%;
-  margin:auto 655px -137px 0;
+  margin:auto 655px -37px 530px;
 }
 .header-container{
   display: flex;
@@ -65,7 +75,6 @@ img {
 }
 .menu {
   background-color: #f0f0f0; 
-  padding: 10px; 
   display: flex;
   justify-content: center;
 }
@@ -86,7 +95,7 @@ img {
 }
 .menu ul {
   list-style-type: none;
-  margin: 0;
+  margin: 0px;
   padding: 0;
 }
 
