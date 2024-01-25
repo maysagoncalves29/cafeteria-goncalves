@@ -93,6 +93,32 @@ img {
   margin: 8px;
   font-family: 'Roboto Slab', serif;
 }
+.btn-inicio{
+  
+  border-radius: 10px; 
+  padding: 10px 20px;
+  background: #00000036; 
+  color: #ffffff; 
+  border: none; 
+  cursor: pointer;
+  margin: 8px;
+  font-family: 'Roboto Slab', serif;
+ 
+}
+.btn-Estoque{
+  padding-top: 5px;
+    padding-right: 57px;
+    padding-left: 41px;
+    order-radius: 10px; 
+  padding: 10px 20px;
+  background: #af7454; 
+  color: black; 
+  border: none; 
+  cursor: pointer;
+  margin: 8px;
+  font-family: 'Roboto Slab', serif;
+}
+
 .menu ul {
   list-style-type: none;
   margin: 0px;
@@ -109,3 +135,4 @@ img {
   text-decoration: none;
   color: #333; 
 }
+
