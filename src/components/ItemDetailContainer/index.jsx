@@ -20,12 +20,12 @@ const ItemDetailContainer = ({ itemId }) => {
   }, [itemId]);
 
   if (!item) {
-    return <p>Loading...</p>;
+    return <p>Carregando...</p>;
   }
 
   return (
     <div>
-      <h1>Product Details</h1>
+      <h1>Detalhe do Produto</h1>
       <ItemDetail item={item} />
     </div>
   );
