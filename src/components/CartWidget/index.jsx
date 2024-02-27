@@ -1,30 +1,38 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { Component } from 'react';
+// CartWidget.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from './CartContext';
 
-class CartWidget extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            itemCount: 0,
-        }
-    }
-    handleIncrement = () => {
-        this.setState((prevState) => ({
-            itemCount: prevState.itemCount + 1,
-        }));
-    }
+const CartWidget = () => {
+  const { items, totalPrice, removeItem } = useCart();
 
-    
- render() {
-    const { itemCount } = this.state;
-    return (
-      <div className="cartShopp">
-        <FontAwesomeIcon icon={faShoppingCart} className='btn-cart' onClick={this.handleIncrement} style={{ cursor: 'pointer'}}/>
-        <span>{itemCount}</span>
+  const cartItemCount = items.reduce((acc, item) => acc + item.quantity, 0);
+
+  if (cartItemCount === 0) {
+    // Não mostra o widget se não houver itens no carrinho
+    return null;
+  }
+
+  return (
+    <div>
+      <Link to="/cart">
+        <FaShoppingCart style={{ cursor: 'pointer' }} />
+        <span>{cartItemCount}</span>
+      </Link>
+      <div>
+        {items.map((item) => (
+          <div key={item.id}>
+            <p>
+              {item.quantity} x {item.name} - R${item.price.toFixed(2)} cada
+              <button onClick={() => removeItem(item)}>Remover</button>
+            </p>
+          </div>
+        ))}
       </div>
-    );
-  };
-}
+      <p>Total: R${totalPrice.toFixed(2)}</p>
+    </div>
+  );
+};
 
 export default CartWidget;

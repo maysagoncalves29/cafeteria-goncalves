@@ -1,5 +1,6 @@
 import './App.css';
 import { CartProvider } from './components/CartContext';
+import CartWidget from './components/CartWidget';
 import Header from './components/Header';
 import ItemCount from './components/ItemCount';
 import ItemDetailContainer from './components/ItemDetailContainer';
@@ -19,12 +20,19 @@ const App = () => {
       <ItemCount estoque={15}
                 count={count}
                 setCount={setCount}/>
-      
+       <CartWidget/>
       <CartProvider>
         <div>
         <ItemListContainer/>
         <ItemDetailContainer itemId={1} />
+         <CartWidget />
+         <Switch>
+            <Route path="/cart" component={CartPage} />
+            <Route path="/item/:id" component={ItemDetailContainer} />
+          </Switch>
+
         </div>
+        
       </CartProvider>
       
    

@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import ItemDetail from '../ItemDetail';
-import { fetchItems } from '../ItemList/mockData';
+// ItemDetailContainer.jsx
+import React, { useState } from 'react';
+import ItemDetail from './ItemDetail';
+import { useCart } from './CartContext';
 
-const ItemDetailContainer = ({ itemId }) => {
-  const [item, setItem] = useState(null);
+const ItemDetailContainer = ({ item }) => {
+  const { addItem } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchItems();
-        const selectedItem = data.find((item) => item.id === itemId);
-        setItem(selectedItem);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  const handleAddToCart = () => {
+    addItem({ ...item, quantity });
+  };
 
-    fetchData();
-  }, [itemId]);
-
-  if (!item) {
-    return <p>Carregando...</p>;
-  }
+  const handleFinishPurchase = () => {
+    // Here you can add logic to complete the purchase
+    console.log('Purchase completed!');
+  };
 
   return (
     <div>
-      <h1>Detalhe do Produto</h1>
       <ItemDetail item={item} />
+      <input
+        type="number"
+        value={quantity}
+        onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+        min={1}
+      />
+      <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
+      {quantity === item.stock && (
+        <button onClick={handleFinishPurchase}>Finalizar minha compra</button>
+      )}
     </div>
   );
 };
