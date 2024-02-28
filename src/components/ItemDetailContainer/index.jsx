@@ -1,33 +1,31 @@
-// ItemDetailContainer.jsx
-import React, { useState } from 'react';
+
+import React from 'react';
 import ItemDetail from './ItemDetail';
-import { useCart } from './CartContext';
+import { useParams } from 'react-router-dom';
+import { getFirestore } from 'firebase/app';
 
-const ItemDetailContainer = ({ item }) => {
-  const { addItem } = useCart();
-  const [quantity, setQuantity] = useState(1);
+const ItemDetailContainer = () => {
+  const { id } = useParams();
+  const [item, setItem] = React.useState(null);
+  const db = getFirestore();
 
-  const handleAddToCart = () => {
-    addItem({ ...item, quantity });
-  };
+  React.useEffect(() => {
+    const itemRef = db.collection('items').doc(id);
 
-  const handleFinishPurchase = () => {
-    // Here you can add logic to complete the purchase
-    console.log('Purchase completed!');
-  };
+    // Substitua a chamada mock por uma consulta real ao Firestore
+    const unsubscribe = itemRef.onSnapshot((doc) => {
+      setItem({ id: doc.id, ...doc.data() });
+    });
+
+    return () => unsubscribe();
+  }, [db, id]);
 
   return (
     <div>
-      <ItemDetail item={item} />
-      <input
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-        min={1}
-      />
-      <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
-      {quantity === item.stock && (
-        <button onClick={handleFinishPurchase}>Finalizar minha compra</button>
+      {item ? (
+        <ItemDetail item={item} />
+      ) : (
+        <p>Carregando detalhes do item...</p>
       )}
     </div>
   );

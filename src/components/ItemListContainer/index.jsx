@@ -1,15 +1,17 @@
-import ItemDetailContainer from "../ItemDetailContainer";
-import ItemList from "../ItemList";
+// ItemListContainer.js
+import React from 'react';
+import ItemList from './ItemList';
+import ItemCollection from './ItemCollection';
 
 const ItemListContainer = () => {
-    return (
-      <div>
-      <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        At varius vel pharetra vel turpis nunc. </h3>
-         <ItemList/>
-         <ItemDetailContainer itemId={1}/>
-         </div>
-    );
-  };
-  
-  export default ItemListContainer;
+  const items = ItemCollection();
+
+  return (
+    <div>
+      <h2>Catálogo</h2>
+      <ItemList items={items} />
+    </div>
+  );
+};
+
+export default ItemListContainer;
